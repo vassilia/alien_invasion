@@ -9,9 +9,11 @@ class Bullet(Sprite):
         super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
-        self.color = self.settings.bullet_color
-        # Create a bullet rect at (0, 0) and then set correct position.
-        self.rect = pygame.Rect(0,0,self.settings.bullet_width,self.settings.bullet_height)
+        self.image = pygame.image.load('images/bomb.bmp')
+        # self.color = self.settings.bullet_color
+        # # Create a bullet rect at (0, 0) and then set correct position.
+        # self.rect = pygame.Rect(0,0,self.settings.bullet_width,self.settings.bullet_height)
+        self.rect = self.image.get_rect()
         self.rect.midtop = ai_game.ship.rect.midtop
 
         #store bullets position as decimal value
@@ -23,6 +25,9 @@ class Bullet(Sprite):
         self.y -= self.settings.bullet_speed
         #update the rect position
         self.rect.y = self.y
-    def draw_bullet(self):
+    # def draw_bullet(self):
         #draw the bullets to the screen
-        pygame.draw.rect(self.screen, self.color, self.rect)
+        # pygame.draw.rect(self.screen, self.color, self.rect)
+    def blitme_bullet(self):
+        # draw ship at current location
+        self.screen.blit(self.image, self.rect)
